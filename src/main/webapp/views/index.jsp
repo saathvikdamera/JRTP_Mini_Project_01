@@ -15,7 +15,7 @@
 	crossorigin="anonymous">
 </head>
 <body>
-	<div class="container">
+	<div class="container-fluid">
 		<h2>Report Plans</h2>
 		<form:form action="plan" method="post" modelAttribute="search">
 			<table class="table table-striped">
@@ -44,7 +44,7 @@
 					<td>End Date :</td>
 					<td><form:input type="date" path="endDate" class="date-picker" /></td>
 					<td><input type="submit" value="Search" class="btn btn-primary btn-sm"/></td>
-					<td><form:button class="btn btn-secondary btn-sm"><a href="/" style="color: white">Reset</a></form:button></td>
+					<td><a href="/" style="color: white" class="btn btn-secondary btn-sm">Reset</a></td>
 				</tr>
 			</table>
 		</form:form>
@@ -79,7 +79,7 @@
 			</tbody>
 		</table>
 		<hr>
-		<p>${export}</p>
+		<p style="color: green;">${export}</p>
 		<a href="excel">Export Excel</a>
 		<a href="pdf">Export Pdf</a>
 	</div>

@@ -1,7 +1,9 @@
 package com.Damera.service.impl;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -85,16 +87,20 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 	public boolean exportEmail() {
-		String filePath = "D:\\19-JFSD\\Java RealTime Project\\Mini project Workspace\\PlansData.xls";
+		File f = new File("Plans.xls");
+		//String filePath = "D:\\19-JFSD\\Java RealTime Project\\Mini project Workspace\\PlansData.xls";
 		try {
 
 			List<CitizenPlans> plans = repo.findAll();
-			FileOutputStream fos = new FileOutputStream(filePath);
+			FileOutputStream fos = new FileOutputStream(f);
 			egenerator.generateExcel(fos, plans);
 			utils.sendEmailWithAttachment("saathvikdamera@gmail.com",
-					"Citizen Plans Report","Here is the excelsheet of plans.", filePath);
+					"Citizen Plans Report","Here is the excelsheet of plans.", f);
+			
+			fos.close();
+			f.delete();
 
-		} catch (FileNotFoundException | MessagingException e) {
+		} catch (MessagingException | IOException e) {
 			e.printStackTrace();
 		}
 		return true;
@@ -102,14 +108,17 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 	public boolean exportPDF() {
-		String filePath = "D:\\19-JFSD\\Java RealTime Project\\Mini project Workspace\\PlansData.pdf";
+		File f = new File("Plans.pdf");
+	//	String filePath = "D:\\19-JFSD\\Java RealTime Project\\Mini project Workspace\\PlansData.pdf";
 		try {
 			List<CitizenPlans> plans = repo.findAll();
-			FileOutputStream fos = new FileOutputStream(filePath);
+			FileOutputStream fos = new FileOutputStream(f );
 			pgenerator.generatePDF(plans, fos);
 			utils.sendEmailWithAttachment("saathvikdamera@gmail.com",
-					"Citizen Plans Report","Here is the pdf of plans.", filePath);
-		} catch (FileNotFoundException | MessagingException e) {
+					"Citizen Plans Report","Here is the pdf of plans.", f);
+			fos.close();
+			f.delete();
+		} catch (MessagingException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

@@ -49,14 +49,14 @@ public class ExcelGenerator {
 			
 			if(c.getPlanStartDate() != null) {
 			LocalDate localDate = c.getPlanStartDate();
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-LLLL-yyyy");
 			String date = localDate.format(formatter);
 			dataRow.createCell(5).setCellValue(date);
 			}
 			
 			if(c.getPlanEndDate() != null) {
 			LocalDate localDate1 = c.getPlanEndDate();
-			DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+			DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd-LLLL-yyyy");
 			String date1 = localDate1.format(formatter1);
 			dataRow.createCell(6).setCellValue(date1);
 			}

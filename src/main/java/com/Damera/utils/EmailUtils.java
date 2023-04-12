@@ -20,7 +20,7 @@ public class EmailUtils {
 	public void sendEmailWithAttachment(String to,
 			String subject, 
 			String text,
-			String pathToAttachment) throws MessagingException {
+			File file) throws MessagingException {
 	    MimeMessage message = emailSender.createMimeMessage();
 
 	    // use the true flag to indicate you need a multipart message
@@ -32,8 +32,8 @@ public class EmailUtils {
 	    helper.setText(text);
 
 	    // attach the file
-	    FileSystemResource file = new FileSystemResource(new File(pathToAttachment));
-	    helper.addAttachment(file.getFilename(), file);
+	   // FileSystemResource file = new FileSystemResource(new File(pathToAttachment));
+	    helper.addAttachment("Plans", file);
 
 	    emailSender.send(message);
 	    System.out.println("Mail with attachment sent successfully");
